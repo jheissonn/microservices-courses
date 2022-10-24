@@ -1,0 +1,32 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: application
+    url: jdbc:mysql://localhost:3307/alurafood-pedidos?createDatabaseIfNotExist=true
+    password: application
+  application:
+    name: pedidos-ms
+eureka:
+  instance:
+    instance-id: ${spring.application.name}:${random.int}
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8081/eureka
+server:
+  port: '0'
+
+
+management:
+  info:
+    env:
+      enabled: true
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+
+# This info details we would like to expose
+info:
+  application:
+    name: ${spring.application.name}
+    description: Application by orders

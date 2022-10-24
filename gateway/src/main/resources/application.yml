@@ -1,0 +1,31 @@
+spring:
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: 'true'
+          lowerCaseServiceId: 'true'
+  application:
+    name: gateway
+server:
+  port: '8082'
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8081/eureka
+
+
+management:
+  info:
+    env:
+      enabled: true
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+
+# This info details we would like to expose
+info:
+  application:
+    name: ${spring.application.name}
+    description: Gateway payments

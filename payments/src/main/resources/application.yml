@@ -1,0 +1,38 @@
+
+management:
+  info:
+    env:
+      enabled: true
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+
+# This info details we would like to expose
+info:
+  application:
+    name: ${spring.application.name}
+    description: 'Application payments'
+spring:
+  application:
+    name: pagamentos-ms
+  datasource:
+    password: application
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: application
+    url: jdbc:mysql://localhost:3306/alurafood-pagamento?createDatabaseIfNotExist=true
+  jpa:
+    show-sql: 'true'
+resilience4j:
+  circuitbreaker:
+    instances:
+      atualizaPedido:
+        waitDurationInOpenState: 50s
+        minimumNumberOfCalls: '2'
+        slidingWindowSize: '3'
+server:
+  port: '0'
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8081/eureka
